@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>object to object pattern</title>
+  </head>
+  <body>
+    <script>
+      let Workshop = {
+        teacher: "Prabjeet",
+        topic: "Javascript",
+        maxNumberOfSessionsPerWeek: 10,
+        ask(question) {
+          console.log(this.teacher, question);
+        },
+        getSessionDetails() {
+          console.log(`Session: ${this.topic}, Teacher: ${this.teacher}`);
+        },
+      };
+
+      let AnotherWorkshop = Object.assign(Object.create(Workshop), {
+        speakup(msg) {
+          this.ask(msg);
+        },
+        getMaxSessionsPerWeek(msg) {
+          console.log(this.maxNumberOfSessionsPerWeek);
+        },
+      });
+
+      var JSPerformance = Object.create(AnotherWorkshop);
+      JSPerformance.speakup("hello classes?");
+      JSPerformance.getSessionDetails();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>class to function pattern</title>
+  </head>
+  <body>
+    <script>
+      // convert class to function using prototype
+      function Workshop(teacher, topic) {
+        this.teacher = teacher;
+        this.topic = topic;
+      }
+      Workshop.prototype.maxNumberOfSessionsPerWeek = 10;
+      Workshop.prototype.ask = function (question) {
+        console.log(this.teacher, question);
+      };
+      Workshop.prototype.getSessionDetails = function () {
+        console.log(`Session: ${this.topic}, Teacher: ${this.teacher}`);
+      };
+
+      function AnotherWorkshop(teacher, topic) {
+        Workshop.call(this, teacher, topic);
+      }
+      AnotherWorkshop.prototype = Object.create(Workshop.prototype);
+      AnotherWorkshop.prototype.speakup = function (msg) {
+        this.ask(msg);
+      };
+      AnotherWorkshop.prototype.getMaxSessionsPerWeek = function (msg) {
+        console.log(this.maxNumberOfSessionsPerWeek);
+      };
+
+      var JSPerformance = new AnotherWorkshop("Prabjeet", "Javascript");
+      JSPerformance.speakup("hello classes?");
+      JSPerformance.getSessionDetails();
+    </script>
+  </body>
+</html>
